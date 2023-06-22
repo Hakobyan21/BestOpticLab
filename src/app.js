@@ -172,7 +172,7 @@ class App {
     _setCors() {
         this.app.use(
             cors({
-                origin: ['http://localhost:3001', 'http://localhost:3002'],
+                origin: ['*'],
                 methods: ['GET', 'PUT', 'POST', 'PATCH', 'DELETE'],
                 allowedHeaders: ['Authorization', 'Content-Type', 'Origin'],
                 credentials: true,
