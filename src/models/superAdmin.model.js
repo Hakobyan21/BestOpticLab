@@ -23,14 +23,13 @@ class superAdminModel {
 
 
     static async addTable(info) {
+        console.log(info);
         // console.log(info.info[0].value,'1212121212211212');
   
         let price1;
         let price2;
       
-        console.log(info.info[info.info.length - 1], info.info[info.info.length - 2]);
 
-        // if (info.info[3] && info.info[4] && info.info[2]) {
         if(typeof info.info[info.info.length - 2] === 'string' && typeof info.info[info.info.length - 1] === 'string'  ){
             console.log(1);
             price1 = info.info[info.info.length - 1];
@@ -39,13 +38,9 @@ class superAdminModel {
 
 
         const tableNames = info.info[0];
-        // let isActive = info.info[info.info.length - 3].is_active
         superAdminModel.all_table_names.push(tableNames);
   
 
-        console.log(info, 'info2');
-        console.log(price1, price2, '111111111111111111111');
-        // info.info.splice(-2);
         try {
             const options =
             process.env.NODE_ENV === 'production'
@@ -55,20 +50,6 @@ class superAdminModel {
   
             await pg('super_admin').insert({table_names:tableNames}).onConflict('table_names').ignore();
   
-            // await pg.schema.createTableIfNotExists(
-            //     ${tableNames},
-            //     function (table) {
-            //         table.increments('id');
-            //         table.string('table_name');
-            //         table.string('column_name');
-            //         table.string('value');
-            //         table.integer('price_user');
-            //         table.integer('price_company');
-            //         table.boolean('is_active');
-            //         table.timestamps(false, true);
-            //     }
-            // );
-
 
             const tableExists = await pg.schema.hasTable(tableNames);
 
@@ -85,18 +66,13 @@ if (!tableExists) {
   });
 }
 
-// console.log(price1, price2, '222222222222222');
 
-console.log(info.info[2]);
             if(price1 && price2){
-                // for(let i = 1 ; i< info.info.length-2;i++){
                     await pg(`${tableNames}`)
                         .insert({  table_name: tableNames,column_name: info.info[1].columnName
                             ,price_user: price1, price_company: price2,is_active:false });
                 // }
             }else if(info.info.length == 2){
-                // for(let i = 1 ; i< info.info.length;i++){
-                    // superAdminModel.columns = info.info[i].columnName
                     await pg(`${tableNames}`)
                         .insert({  table_name: tableNames,column_name: info.info[1].columnName,is_active:null
                         });
@@ -106,12 +82,10 @@ console.log(info.info[2]);
             else {
                 let argument = info.info[2].value;
                 info.info.pop();
-                // for(let i = 1 ; i< info.info.length;i++){
                     superAdminModel.columns = info.info[1].columnName;
                     await pg(`${tableNames}`)
                         .insert({  table_name: tableNames,column_name: info.info[1].columnName, is_active:null
                         });
-                // }
                 await pg(`${tableNames}`).update({value:`${dirname}/upload/${argument}`}).where('table_name','=',tableNames).andWhere('column_name','=',superAdminModel.columns);
             }
             await pg.destroy();
@@ -124,7 +98,7 @@ console.log(info.info[2]);
 
     static async dropColumn(dropColumn) {
         const dropColumns = dropColumn.dropColumn;
-        console.log(dropColumns.tableName);
+
 
         const options =
             process.env.NODE_ENV === 'production'
@@ -133,9 +107,10 @@ console.log(info.info[2]);
         const pg = knex(options);
         try {
             const temp = await pg(dropColumns.tableName).del().where('column_name', '=', dropColumns.columnName).returning('*');
+            const delSuperAdmin = await pg('super_admin').del().where('table_names','=',dropColumns.tableName).returning('*')
 
             pg.destroy();
-            return ['deleted successfully !!!!', temp];
+            return ['deleted successfully !!!!', temp,delSuperAdmin];
         } catch (error) {
             return 'inCorrect column name Arm Jan';
         }
@@ -193,11 +168,11 @@ console.log(info.info[2]);
                     ? knexConfigs.production
                     : knexConfigs.development;
             const pg = knex(options);
-            const allTableNames = await pg('super_admin').select('table_names');
+            const allTableNames = await pg('super_admin').select('table_names').orderBy('id');
             console.log(allTableNames);
             //  console.log(allTableNames);
             for (let i in allTableNames) {
-                data.push(await pg.select('*').from(`${allTableNames[i].table_names}`));
+                data.push(await pg('super_admin').select('*').from(`${allTableNames[i].table_names}`).orderBy('id'));
             }
 
 

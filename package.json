@@ -9,6 +9,8 @@
     "migrate-down": "babel-node migrations/1_drop_tables.js",
     "seed": "babel-node seeds/dev/seed.js",
     "dev-seed": "babel-node seeds/dev/seed.js",
+    "reset": "npm run migrate-down && npm run migrate && npm run seed",
+
     "lint-no-fix": "eslint src/",
     "lint": "eslint --fix src/"
   },

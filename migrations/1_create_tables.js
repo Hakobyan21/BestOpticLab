@@ -199,6 +199,7 @@ async function init() {
         const pg = knex(options);
         await up(pg);
         console.log('Successfully created all tables ... ');
+        process.kill(process.pid);
     } catch (error) {
         LoggerUtil.error(error.message);
     }

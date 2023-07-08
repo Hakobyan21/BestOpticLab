@@ -171,16 +171,16 @@ class App {
    */
     _setCors() {
         this.app.use(
-            cors({
-                origin: ['http://localhost:3000','http://localhost:3001','http://localhost:3002','http://localhost:3003',  'http://optic-admin.testenvtest.xyz','http://opticlab.testenvtest.xyz'],
-                methods: ['GET', 'PUT', 'POST', 'PATCH', 'DELETE'],
-                allowedHeaders: ['Authorization', 'Content-Type', 'Origin'],
-                credentials: true,
-                optionsSuccessStatus: 200,
-                maxAge: -1
-            })
+          cors({
+            origin: ['http://optic-admin.testenvtest.xyz','http://opticlab.testenvtest.xyz'],
+            methods: ['GET', 'PUT', 'POST', 'PATCH', 'DELETE', 'OPTIONS'],
+            allowedHeaders: ['Origin', 'X-Requested-With', 'Content-Type', 'Accept'],
+            credentials: true,
+            optionsSuccessStatus: 200,
+            maxAge: -1,
+          })
         );
-    }
+      }
 
     /* @private
    * @description Set body parser:

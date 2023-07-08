@@ -48,6 +48,7 @@ async function init() {
         await DropTables.dropCreatedTables();
         await DropTables.down()
         console.log('Successfully dropped all tables ... ');
+        process.kill(process.pid);
     } catch (error) {
         LoggerUtil.error(error.message);
     }

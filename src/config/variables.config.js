@@ -1,6 +1,7 @@
 // import dotenv from 'dotenv';
 require('dotenv').config();
 const config = {
+    API:process.env.API,
     UPLOAD_IMAGES: '../../upload',
     LOCALTUNEL:'yes',
     ADMIN_PASSWORD: 'admin!@#$',
