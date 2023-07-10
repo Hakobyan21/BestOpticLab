@@ -6,7 +6,6 @@ import morgan from 'morgan';
 import session from 'express-session';
 import passport from 'passport';
 const dotenv = require('dotenv');
-import helmet from 'helmet';
 
 // Load the environment variables from the .env file
 const env = dotenv.config({ path: './.env' });
@@ -63,7 +62,7 @@ class App {
         });
   
         this.app.get('/config', (req, res) => {
-            console.log(1);
+            console.log(1)
             res.send({
                 publishableKey: process.env.STRIPE_PUBLISHABLE_KEY,
             });
@@ -78,24 +77,24 @@ class App {
             //
             // [0] https://stripe.com/docs/api/payment_intents/create
             try {
-                const paymentIntent = await stripe.paymentIntents.create({
-                    currency: 'EUR',
-                    amount: 10000,
-                    automatic_payment_methods: { enabled: true }
-                });
+              const paymentIntent = await stripe.paymentIntents.create({
+                currency: 'EUR',
+                amount: 10000,
+                automatic_payment_methods: { enabled: true }
+              });
           
-                // Send publishable key and PaymentIntent details to client
-                res.send({
-                    clientSecret: paymentIntent.client_secret,
-                });
+              // Send publishable key and PaymentIntent details to client
+              res.send({
+                clientSecret: paymentIntent.client_secret,
+              });
             } catch (e) {
-                return res.status(400).send({
-                    error: {
-                        message: e.message,
-                    },
-                });
+              return res.status(400).send({
+                error: {
+                  message: e.message,
+                },
+              });
             }
-        });
+          });
   
         // Expose a endpoint as a webhook handler for asynchronous events.
         // Configure your webhook in the stripe developer dashboard
@@ -142,9 +141,7 @@ class App {
         this.app.use(passport.initialize());
         this.app.use(passport.session());
         this.app.use('/upload', express.static('upload'));
-        // this.app.use('/admin', superadminOnly);
-
-        this.app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
+        //this.app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
     }
 
     /* @description Initialize the App.
@@ -156,7 +153,6 @@ class App {
         this._setRequestParser();
         this._initializeApi();
         this._setErrorHandler();
-
     }
 
     /* @private

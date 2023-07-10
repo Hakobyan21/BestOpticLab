@@ -2,7 +2,7 @@ import bCrypt from 'bcryptjs';
 // NPM Modules
 import knex from 'knex';
 import knexConfigs from '../../knex.configs';
-import config from '../src/config/variables.config';
+import config from '../../src/config/variables.config';
 
 const { SUPERADMIN_PASSWORD, API } = config;
 

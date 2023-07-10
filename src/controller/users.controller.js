@@ -8,9 +8,10 @@ import { SuccessHandlerUtil } from '../utils';
 import process from 'process';
 
 import SuperAdminShippo from '../models/superAdminShippo'
+const shippo_key = process.env.SHIPPO_API_KEY
 
 const shippo = require('shippo')(
-    'shippo_test_5f7acd178f9dfcf8e2562dbe56e3da4c799abb41'
+    shippo_key
 );  
 
 const CLIENT_ID = process.env.CLIENT_ID;

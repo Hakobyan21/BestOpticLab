@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 // Standard modules
 import http from 'http';
 import 'dotenv/config';
