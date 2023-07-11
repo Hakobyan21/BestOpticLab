@@ -11,12 +11,12 @@ import UsersValidation from '../middlewares/validation/users.validation';
 
 
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY, {
-  apiVersion: '2020-08-27',
-  appInfo: { // For sample support and debugging, not required for production:
-    name: "stripe-samples/accept-a-payment/payment-element",
-    version: "0.0.2",
-    url: "https://github.com/stripe-samples"
-  } 
+    apiVersion: '2020-08-27',
+    appInfo: { // For sample support and debugging, not required for production:
+        name: 'stripe-samples/accept-a-payment/payment-element',
+        version: '0.0.2',
+        url: 'https://github.com/stripe-samples'
+    } 
 });
 
 
@@ -27,14 +27,14 @@ router.get('/', (req, res) => {
     const path = resolve(process.env.STATIC_DIR + '/index.html');
     res.sendFile(path);
     console.log('11');
-  });
+});
 router.get('/config', (req, res) => {
     res.send({
         publishableKey: process.env.STRIPE_PUBLISHABLE_KEY,
-      });
-    }
+    });
+}
     
-)
+);
 router.get('/create-payment-intent/:amount', async (req, res) => {
     console.log('3333');
     // Create a PaymentIntent with the amount, currency, and a payment method type.
@@ -43,27 +43,27 @@ router.get('/create-payment-intent/:amount', async (req, res) => {
     //
     // [0] https://stripe.com/docs/api/payment_intents/create
     try {
-      const amount = req.params.amount;
-      console.log(amount);
-      const paymentIntent = await stripe.paymentIntents.create({
-        currency: 'USD',
-        amount: amount * 100,
-        automatic_payment_methods: { enabled: true }
-      });
-      console.log(paymentIntent);
-      console.log(paymentIntent.client_secret);
-      // Send publishable key and PaymentIntent details to client
-      res.send({
-        clientSecret: paymentIntent.client_secret,
-      });
+        const amount = req.params.amount;
+        console.log(amount);
+        const paymentIntent = await stripe.paymentIntents.create({
+            currency: 'USD',
+            amount: amount * 100,
+            automatic_payment_methods: { enabled: true }
+        });
+        console.log(paymentIntent);
+        console.log(paymentIntent.client_secret);
+        // Send publishable key and PaymentIntent details to client
+        res.send({
+            clientSecret: paymentIntent.client_secret,
+        });
     } catch (e) {
-      return res.status(400).send({
-        error: {
-          message: e.message,
-        },
-      });
+        return res.status(400).send({
+            error: {
+                message: e.message,
+            },
+        });
     }
-  });
+});
 
 
 export default router;

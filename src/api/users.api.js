@@ -76,35 +76,35 @@ router.get('/returningShip/:id',
     // UsersValidation.validateAddArgs,
     UsersController.returningShip);
 
-    router.post('/rateDetails',
+router.post('/rateDetails',
     // UsersValidation.validateAddArgs,
     UsersController.rateDetails);
 
-    router.get('/rateDetails/:id',
+router.get('/rateDetails/:id',
     // UsersValidation.validateAddArgs,
     UsersController.getRateDetails);
-    router.delete(
-        "/cancelShippoOrder/:object_id",
-        // UsersValidation.validateAddArgs,
-        UsersController.cancelShippoOrder
-      );
+router.delete(
+    '/cancelShippoOrder/:object_id',
+    // UsersValidation.validateAddArgs,
+    UsersController.cancelShippoOrder
+);
 
 
 
 
-    router.get('/paymentMethods', 
-        UsersController.getPaymentMethods
-    );
+router.get('/paymentMethods', 
+    UsersController.getPaymentMethods
+);
 
-    router.put('/paymentMethods', 
-  // AuthMiddleware.authenticateFor(["admin"]),
+router.put('/paymentMethods', 
+    // AuthMiddleware.authenticateFor(["admin"]),
     UsersController.changePaymentMethods    
 );
 
 
 router.get('/shipMethods', 
     // AuthMiddlaware.authenticateFor(["admin"]),
-UsersController.getShipMethods
+    UsersController.getShipMethods
 );
 
 

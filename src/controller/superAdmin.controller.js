@@ -1,10 +1,9 @@
 // Local Modules
-import { log } from 'console';
 import GeneratePDF from '../middlewares/generatePDF';
 import { superAdminServices } from '../services';
 import { SuccessHandlerUtil } from '../utils';
 import process from 'process';
-
+import fs from 'fs';
 // NPM Modules
 // import config from '../config/variables.config';
 
@@ -52,7 +51,20 @@ export default class UsersController {
         try {
             const  dropColumn  = req.body;
             const superAdmin = await superAdminServices.dropColumn({dropColumn});
-            
+            console.log(superAdmin, 7878787878787);
+            if(superAdmin) {
+                if(superAdmin[1][0].value) {
+                    const pathToFile = superAdmin[1][0].value;
+                    
+                    fs.unlink(pathToFile, function(err) {
+                        if (err) {
+                            throw err;
+                        } else {
+                            console.log('Successfully deleted the file.');
+                        }
+                    });
+                }
+            }
             SuccessHandlerUtil.handleAdd(res, next, superAdmin);
         } catch (error) {
             console.log('111');
@@ -158,8 +170,9 @@ export default class UsersController {
 
     static async addPic(req, res, next) {
         try {
-            const { file } = req;
+            const {file} = req;
             const { originalname, filename, path } = file;
+
             const dirname =  `${HOST_OF_SERVER}/` + path;
             SuccessHandlerUtil.handleAdd(res, next, { originalname, filename, dirname, success: true  });
         } catch (error) {
@@ -221,7 +234,19 @@ export default class UsersController {
         try {
             const { id } = req.params;
             const deletedUser = await superAdminServices.deleteForStyles(id);
-
+            if(deletedUser) {
+                if(deletedUser[0].image) {
+                    const pathToFile = deletedUser[0].image;
+                    
+                    fs.unlink(pathToFile, function(err) {
+                        if (err) {
+                            throw err;
+                        } else {
+                            console.log('Successfully deleted the file.');
+                        }
+                    });
+                }
+            }
             SuccessHandlerUtil.handleGet(res, next, deletedUser);
         } catch (error) {
             next(error);
@@ -254,7 +279,19 @@ export default class UsersController {
         try {
             const { id } = req.params;
             const deletedUser = await superAdminServices.deleteForHome(id);
-
+            if(deletedUser) {
+                if(deletedUser[0].image) {
+                    const pathToFile = deletedUser[0].image;
+                    
+                    fs.unlink(pathToFile, function(err) {
+                        if (err) {
+                            throw err;
+                        } else {
+                            console.log('Successfully deleted the file.');
+                        }
+                    });
+                }
+            }
             SuccessHandlerUtil.handleGet(res, next, deletedUser);
         } catch (error) {
             next(error);
