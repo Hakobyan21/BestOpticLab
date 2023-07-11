@@ -46,7 +46,7 @@ class DropTables{
 async function init() {
     try {
         await DropTables.dropCreatedTables();
-        await DropTables.down()
+        await DropTables.down();
         console.log('Successfully dropped all tables ... ');
         process.kill(process.pid);
     } catch (error) {
