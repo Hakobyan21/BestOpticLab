@@ -52,33 +52,33 @@ export default class UsersServices {
 
     static async ratesAndTransitTimes(payload, token) {
         const fbody = {
-            "accountNumber": {
-              "value": "740561073"
+            'accountNumber': {
+                'value': '740561073'
             },
-            "requestedShipment": {
-              "shipper": payload,
-              "recipient": {
-                "address": {
-                  "postalCode": 75063,
-                  "countryCode": "US"
-                }
-              },
-              "pickupType": "DROPOFF_AT_FEDEX_LOCATION",
-              "rateRequestType": [
-                "ACCOUNT",
-                "LIST"
-              ],
-              "requestedPackageLineItems": [
-                {
-                  "weight": {
-                    "units": "LB",
-                    "value": 10
-                  }
-                }
-              ]
+            'requestedShipment': {
+                'shipper': payload,
+                'recipient': {
+                    'address': {
+                        'postalCode': 75063,
+                        'countryCode': 'US'
+                    }
+                },
+                'pickupType': 'DROPOFF_AT_FEDEX_LOCATION',
+                'rateRequestType': [
+                    'ACCOUNT',
+                    'LIST'
+                ],
+                'requestedPackageLineItems': [
+                    {
+                        'weight': {
+                            'units': 'LB',
+                            'value': 10
+                        }
+                    }
+                ]
             
-          }
-          }
+            }
+        };
         const rates = [];
         const url = 'https://apis-sandbox.fedex.com/rate/v1/rates/quotes';
         const headers = {
@@ -96,7 +96,7 @@ export default class UsersServices {
         // console.log(response +"11111111111111111111111111111111111111")
 
         const instertedData = await UsersRateItems.create({ rateReplyDetails: data.output.rateReplyDetails });
-        const arr = [data?.output?.rateReplyDetails]
+        const arr = [data?.output?.rateReplyDetails];
         arr.push({ rateId: instertedData.id });
 
         // for (let el of arr[0]) {
@@ -116,61 +116,61 @@ export default class UsersServices {
 
     static async ship(payload, token) {
         const fbody = {
-            "labelResponseOptions": "URL_ONLY",
-            "requestedShipment": {
-              "shipper": payload,
-              "recipients": [
-                {
-                  "contact": {
-                    "personName": "RECIPIENT NAME",
-                    "phoneNumber": 1234567890,
-                    "companyName": "Recipient Company Name"
-                  },
-                  "address": {
-                    "streetLines": [
-                      "RECIPIENT STREET LINE 1",
-                      "RECIPIENT STREET LINE 2"
-                    ],
-                    "city": "Collierville",
-                    "stateOrProvinceCode": "TN",
-                    "postalCode": 38017,
-                    "countryCode": "US"
-                  }
-                }
-              ],
-              "shipDatestamp": "2020-07-03",
-              "serviceType": "PRIORITY_OVERNIGHT",
-              "packagingType": "FEDEX_ENVELOPE",
-              "pickupType": "USE_SCHEDULED_PICKUP",
-              "blockInsightVisibility": false,
-              "shippingChargesPayment": {
-                "paymentType": "SENDER"
-              },
-              "shipmentSpecialServices": {
-                "specialServiceTypes": [
-                  "RETURN_SHIPMENT"
+            'labelResponseOptions': 'URL_ONLY',
+            'requestedShipment': {
+                'shipper': payload,
+                'recipients': [
+                    {
+                        'contact': {
+                            'personName': 'RECIPIENT NAME',
+                            'phoneNumber': 1234567890,
+                            'companyName': 'Recipient Company Name'
+                        },
+                        'address': {
+                            'streetLines': [
+                                'RECIPIENT STREET LINE 1',
+                                'RECIPIENT STREET LINE 2'
+                            ],
+                            'city': 'Collierville',
+                            'stateOrProvinceCode': 'TN',
+                            'postalCode': 38017,
+                            'countryCode': 'US'
+                        }
+                    }
                 ],
-                "returnShipmentDetail": {
-                  "returnType": "PRINT_RETURN_LABEL"
-                }
-              },
-              "labelSpecification": {
-                "imageType": "PDF",
-                "labelStockType": "PAPER_85X11_TOP_HALF_LABEL"
-              },
-              "requestedPackageLineItems": [
-                {
-                  "weight": {
-                    "value": 1,
-                    "units": "LB"
-                  }
-                }
-              ]
+                'shipDatestamp': '2020-07-03',
+                'serviceType': 'PRIORITY_OVERNIGHT',
+                'packagingType': 'FEDEX_ENVELOPE',
+                'pickupType': 'USE_SCHEDULED_PICKUP',
+                'blockInsightVisibility': false,
+                'shippingChargesPayment': {
+                    'paymentType': 'SENDER'
+                },
+                'shipmentSpecialServices': {
+                    'specialServiceTypes': [
+                        'RETURN_SHIPMENT'
+                    ],
+                    'returnShipmentDetail': {
+                        'returnType': 'PRINT_RETURN_LABEL'
+                    }
+                },
+                'labelSpecification': {
+                    'imageType': 'PDF',
+                    'labelStockType': 'PAPER_85X11_TOP_HALF_LABEL'
+                },
+                'requestedPackageLineItems': [
+                    {
+                        'weight': {
+                            'value': 1,
+                            'units': 'LB'
+                        }
+                    }
+                ]
             },
-            "accountNumber": {
-              "value": 740561073
+            'accountNumber': {
+                'value': 740561073
             }
-          }
+        };
 
         const url = 'https://apis-sandbox.fedex.com/ship/v1/shipments';
 

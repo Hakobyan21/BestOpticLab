@@ -142,9 +142,6 @@ export default class UsersController {
 
 
 
-
-
-
     static async changeLoginOptions(req, res, next) {
         try {
             const editLoginOptions  = req.body;
@@ -160,6 +157,7 @@ export default class UsersController {
     static async getLoginOptions(req, res, next) {
         try {
             const { id } = req.params;
+            console.log(id);
             const user = await superAdminServices.getLoginOptionsById(id);
 
             SuccessHandlerUtil.handleGet(res, next, { ...user});

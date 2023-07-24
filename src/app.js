@@ -62,7 +62,7 @@ class App {
         });
   
         this.app.get('/config', (req, res) => {
-            console.log(1)
+            console.log(1);
             res.send({
                 publishableKey: process.env.STRIPE_PUBLISHABLE_KEY,
             });
@@ -77,24 +77,24 @@ class App {
             //
             // [0] https://stripe.com/docs/api/payment_intents/create
             try {
-              const paymentIntent = await stripe.paymentIntents.create({
-                currency: 'EUR',
-                amount: 10000,
-                automatic_payment_methods: { enabled: true }
-              });
+                const paymentIntent = await stripe.paymentIntents.create({
+                    currency: 'EUR',
+                    amount: 10000,
+                    automatic_payment_methods: { enabled: true }
+                });
           
-              // Send publishable key and PaymentIntent details to client
-              res.send({
-                clientSecret: paymentIntent.client_secret,
-              });
+                // Send publishable key and PaymentIntent details to client
+                res.send({
+                    clientSecret: paymentIntent.client_secret,
+                });
             } catch (e) {
-              return res.status(400).send({
-                error: {
-                  message: e.message,
-                },
-              });
+                return res.status(400).send({
+                    error: {
+                        message: e.message,
+                    },
+                });
             }
-          });
+        });
   
         // Expose a endpoint as a webhook handler for asynchronous events.
         // Configure your webhook in the stripe developer dashboard
@@ -171,16 +171,17 @@ class App {
    */
     _setCors() {
         this.app.use(
-          cors({
-            origin: ['http://optic-admin.testenvtest.xyz','http://opticlab.testenvtest.xyz'],
-            methods: ['GET', 'PUT', 'POST', 'PATCH', 'DELETE', 'OPTIONS'],
-            allowedHeaders: ['Origin', 'X-Requested-With', 'Content-Type', 'Accept'],
-            credentials: true,
-            optionsSuccessStatus: 200,
-            maxAge: -1,
-          })
+            cors({
+                // origin: ['http://optic-admin.testenvtest.xyz','http://opticlab.testenvtest.xyz'],
+                origin: ['*'],
+                methods: ['GET', 'PUT', 'POST', 'PATCH', 'DELETE', 'OPTIONS'],
+                allowedHeaders: ['Origin', 'X-Requested-With', 'Content-Type', 'Accept'],
+                credentials: true,
+                optionsSuccessStatus: 200,
+                maxAge: -1,
+            })
         );
-      }
+    }
 
     /* @private
    * @description Set body parser:
