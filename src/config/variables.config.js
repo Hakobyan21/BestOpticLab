@@ -13,7 +13,7 @@ const config = {
     PORT: process.env.PORT || 3005,
     ONE_WAY_HASH_SECRET: process.env.ONE_WAY_HASH_SECRET,
     DISABLE_REQUEST_LOG: process.env.DISABLE_REQUEST_LOG,
-    CORS: process.env.CORS?.split(',') || '*',
+    CORS: process.env.CORS?.split(',') || 'http://localhost:3000',
     PSQL: {
         URL: process.env.PSQL_URL,
         PORT: process.env.PSQL_PORT || 5432,
@@ -31,8 +31,8 @@ const config = {
     AUTH: {
         JWT_ACCESS_SECRET: process.env.JWT_ACCESS_SECRET,
         JWT_REFRESH_SECRET: process.env.JWT_REFRESH_SECRET,
-        ACCESS_TOKEN_ACTIVE_TIME: process.env.ACCESS_TOKEN_ACTIVE_TIME || '1h',
-        REFRESH_TOKEN_ACTIVE_TIME: process.env.REFRESH_TOKEN_ACTIVE_TIME || '1d',
+        ACCESS_TOKEN_ACTIVE_TIME: process.env.ACCESS_TOKEN_ACTIVE_TIME || '60000ms',
+        REFRESH_TOKEN_ACTIVE_TIME: process.env.REFRESH_TOKEN_ACTIVE_TIME || '1h',
     },
 };
 

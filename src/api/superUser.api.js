@@ -46,7 +46,6 @@ router.post(
 );
 router.get(
     '/getColumns',
-    AuthMiddleware.authenticateFor(["superAdmin", "admin"]),
     superAdminController.getColumns
 );
 router.get(
@@ -69,7 +68,6 @@ router.put(
 
 router.get(
     '/loginOptions/:id',
-    AuthMiddleware.authenticateFor(['superAdmin', 'admin']),
     superAdminController.getLoginOptions
 );
 
@@ -94,7 +92,6 @@ router.get(
 
 router.get(
     '/styles',
-    AuthMiddleware.authenticateFor(['superAdmin', 'admin']),
     superAdminController.getStylesByTitleDiv
 );
 
@@ -118,7 +115,6 @@ router.post(
 
 router.get(
     '/about',
-    AuthMiddleware.authenticateFor(['superAdmin', 'admin']),
     superAdminController.getAboutByTitleDiv
 );
 
@@ -148,7 +144,6 @@ router.post(
 
 router.get(
     '/home',
-    AuthMiddleware.authenticateFor(['superAdmin', 'admin']),
     superAdminController.getHomeByTitleDiv
 );
 

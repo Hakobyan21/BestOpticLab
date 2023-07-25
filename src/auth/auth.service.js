@@ -51,7 +51,7 @@ export default class AuthService {
         return payload;
     }
 
-    static async login(username, email, password) {
+    static async login(username, password) {
         if(username) {
             const user = await AuthModel.findByUsername(username);
             if (!user) {
@@ -65,7 +65,6 @@ export default class AuthService {
     
                 const payload = {
                     id: admin.id,
-                    email: admin.email,
                     username: admin.username,
                     role: admin.role,
                     accessToken,
@@ -81,7 +80,6 @@ export default class AuthService {
 
             const payload = {
                 id: user.id,
-                email: user.email,
                 username: user.username,
                 role: user.role,
                 accessToken,
@@ -90,7 +88,7 @@ export default class AuthService {
             };
             return payload;
         }else {
-            const user = await AuthModel.findByEmail(email);
+            const user = await AuthModel.findByEmail(username);
             if (!user) throw new InputValidationError('Invalid username or password');
             if (!CryptoUtil.isValidPassword(password, user.password)) {
                 throw new InputValidationError('Invalid username or password');
@@ -100,7 +98,6 @@ export default class AuthService {
 
             const payload = {
                 id: user.id,
-                email: user.email,
                 username: user.username,
                 role: user.role,
                 accessToken,

@@ -4,9 +4,9 @@ import { SuccessHandlerUtil } from '../utils';
 export default class AuthController {
     static async login(req, res, next) {
         try {
-            const { username, email, password } = req.body;
+            const { username, password } = req.body;
 
-            const loginResult = await AuthService.login(username, email, password);
+            const loginResult = await AuthService.login(username,  password);
 
             SuccessHandlerUtil.handleAdd(res, next, loginResult);
         } catch (error) {

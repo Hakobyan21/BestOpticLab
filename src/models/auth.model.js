@@ -58,8 +58,8 @@ class UsersModel extends Model {
     }
 
 
-    static findByEmail(email) {
-        return  UsersModel.query().findOne({ email })
+    static findByEmail(username) {
+        return  UsersModel.query().findOne({ username })
     }
 
     // static  fullList(){

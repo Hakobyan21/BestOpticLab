@@ -26,6 +26,7 @@ export default class UsersController {
 
 
     static async addTable(req, res, next) {
+        console.log(req.body,'info2313213');
         try {
             const  info  = req.body;
             const superAdmin = await superAdminServices.addTable({info});
@@ -95,6 +96,7 @@ export default class UsersController {
         }
     }
     static async addColumn(req, res, next) {
+        console.log(req.body,'dnvbjkfsd');
         try {
             const  addColumn  = req.body;
             const superAdmin = await superAdminServices.addColumn({addColumn});
@@ -146,9 +148,11 @@ export default class UsersController {
         try {
             const editLoginOptions  = req.body;
             editLoginOptions.id = 1;
-        
+
+            
             const changes = await superAdminServices.changeLoginOptions(editLoginOptions);
             SuccessHandlerUtil.handleAdd(res, next, changes);
+            // res.send(changes);
         } catch (error) {
             next(error);
         }
@@ -159,6 +163,7 @@ export default class UsersController {
             const { id } = req.params;
             console.log(id);
             const user = await superAdminServices.getLoginOptionsById(id);
+            
 
             SuccessHandlerUtil.handleGet(res, next, { ...user});
         } catch (error) {
