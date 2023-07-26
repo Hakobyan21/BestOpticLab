@@ -2,6 +2,9 @@
   "name": "api_optic",
   "version": "1.0.0",
   "description": "Goverment",
+  "engines": {
+    "node": "18.x"
+  },
   "scripts": {
     "start": "babel-node src/bin/www.js",
     "dev": "babel-watch src/bin/www.js",

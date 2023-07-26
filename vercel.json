@@ -1,0 +1,25 @@
+{
+    "version": 2,
+    "builds": [
+      {
+        "src": "server.js", // Replace "server.js" with the entry point file of your Node.js application
+        "use": "@vercel/node" // Use the Vercel Node.js runtime for serverless deployment
+      }
+    ],
+    "routes": [
+      {
+        "src": "/api/v1/superAdmin/changeLoginOptions",
+        "dest": "server.js" // Replace "server.js" with the entry point file of your Node.js application
+      },
+      {
+        "src": "/api/.*",
+        "dest": "server.js" // Replace "server.js" with the entry point file of your Node.js application
+      },
+      {
+        "src": "/(.*)",
+        "dest": "server.js", // Replace "server.js" with the entry point file of your Node.js application
+        "status": 404 // Redirect all other routes to your Node.js application for handling
+      }
+    ]
+  }
+  
