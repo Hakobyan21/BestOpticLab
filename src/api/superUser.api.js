@@ -5,6 +5,7 @@ import express from 'express';
 import { superAdminController } from '../controller';
 import { ImageUploadMiddleware } from '../middlewares/image-upload.middleware';
 import AuthMiddleware from '../auth/auth.middlware';
+import { AddValidationMiddleware, ChangeValidationMiddleware, DeleteValidationMiddleware } from '../middlewares/validation';
 
 const router = express.Router();
 
@@ -17,6 +18,7 @@ router.post(
 router.post(
     '/addTable',
     AuthMiddleware.authenticateFor(['superAdmin', 'admin']),
+    AddValidationMiddleware.validateCreateTableArgs,
     superAdminController.addTable
 );
 router.post(
@@ -31,7 +33,8 @@ router.post(
 );
 router.delete(
     '/dropColumn',
-    AuthMiddleware.authenticateFor(["superAdmin", "admin"]),
+    AuthMiddleware.authenticateFor(['superAdmin', 'admin']),
+    DeleteValidationMiddleware.validateDropColumnArgs,
     superAdminController.dropColumn
 );
 router.post(
@@ -42,6 +45,7 @@ router.post(
 router.post(
     '/changeColumnName',
     AuthMiddleware.authenticateFor(['superAdmin', 'admin']),
+    ChangeValidationMiddleware.validateColumnNameArgs,
     superAdminController.changeColumnName
 );
 router.get(
@@ -57,12 +61,14 @@ router.get(
 router.post(
     '/insertValues',
     AuthMiddleware.authenticateFor(['superAdmin', 'admin']),
+    AddValidationMiddleware.validateInsertingArgs,
     superAdminController.insertValues
 );
 
 router.put(
     '/changeLoginOptions',
     AuthMiddleware.authenticateFor(['superAdmin', 'admin']),
+    ChangeValidationMiddleware.validateChangeLoginOptionsArgs,
     superAdminController.changeLoginOptions
 );
 
@@ -81,6 +87,7 @@ router.post(
 router.put(
     '/changeSettings',
     AuthMiddleware.authenticateFor(['superAdmin', 'admin']),
+    ChangeValidationMiddleware.validateChangeSettingsArgs,
     superAdminController.changeSettings
 );
 
@@ -98,18 +105,21 @@ router.get(
 router.put(
     '/styles',
     AuthMiddleware.authenticateFor(['superAdmin', 'admin']),
+    ChangeValidationMiddleware.validateChangeStylesArgs,
     superAdminController.changeStyles
 );
 
 router.delete(
     '/styles/:id',
     AuthMiddleware.authenticateFor(['superAdmin', 'admin']),
+    DeleteValidationMiddleware.validateDeleteByIdArgs,
     superAdminController.deleteForStyles
 );
 
 router.post(
     '/styles/add',
     AuthMiddleware.authenticateFor(['superAdmin', 'admin']),
+    AddValidationMiddleware.validateAddStylesArgs,
     superAdminController.addStyle
 );
 
@@ -121,24 +131,29 @@ router.get(
 router.put(
     '/about',
     AuthMiddleware.authenticateFor(['superAdmin', 'admin']),
+    ChangeValidationMiddleware.validateChangeAboutArgs,
     superAdminController.changeAbout
 );
 
 router.delete(
     '/about/:id',
     AuthMiddleware.authenticateFor(['superAdmin', 'admin']),
+    DeleteValidationMiddleware.validateDeleteByIdArgs,
     superAdminController.deleteForAbout
 );
 
 router.post(
     '/about/add',
     AuthMiddleware.authenticateFor(['superAdmin', 'admin']),
+    AddValidationMiddleware.validateAddAboutArgs,
     superAdminController.addAbout
 );
 
+W210♠️♥️♠️, [26.07.23 18:11]
 router.post(
     '/home/add',
     AuthMiddleware.authenticateFor(['superAdmin', 'admin']),
+    AddValidationMiddleware.validateAddToHomeArgs,
     superAdminController.addHome
 );
 
@@ -150,6 +165,7 @@ router.get(
 router.delete(
     '/home/:id',
     AuthMiddleware.authenticateFor(['superAdmin', 'admin']),
+    DeleteValidationMiddleware.validateDeleteByIdArgs,
     superAdminController.deleteForHome
 );
 
@@ -162,6 +178,7 @@ router.get(
 router.put(
     '/terms',
     AuthMiddleware.authenticateFor(['superAdmin', 'admin']),
+    ChangeValidationMiddleware.validateChangeTermsArgs,
     superAdminController.changeTerms
 );
 
@@ -175,17 +192,22 @@ router.get(
     superAdminController.getMessages
 );
 
-router.post('/sendMail', superAdminController.sendMail);
+router.post('/sendMail',
+    AddValidationMiddleware.validateSendMailArgs,
+    superAdminController.sendMail);
 
 router.put(
     '/message/:id',
     AuthMiddleware.authenticateFor(['superAdmin', 'admin']),
+    ChangeValidationMiddleware.validateChangeMessageArgs,
+    ChangeValidationMiddleware.validateChangeByIdArgs,
     superAdminController.changeMessageStatus
 );
 
 router.delete(
     '/message/:id',
     AuthMiddleware.authenticateFor(['superAdmin', 'admin']),
+    DeleteValidationMiddleware.validateDeleteByIdArgs,
     superAdminController.deleteMessage
 );
 
@@ -198,15 +220,17 @@ router.put(
 router.post(
     '/addBoxParams',
     AuthMiddleware.authenticateFor(['admin']),
-
     superAdminController.addBoxParams
 );
 
 router.put(
     '/changeBoxParams',
     AuthMiddleware.authenticateFor(['admin']),
-
     superAdminController.changeBoxParams
 );
 
 export default router;
+
+
+
+

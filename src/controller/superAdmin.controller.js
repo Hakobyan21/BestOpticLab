@@ -11,12 +11,12 @@ const HOST_OF_SERVER = process.env.SERVER_HOST;
 
 export default class UsersController {
 
-    
+
     static async createAdmin(req, res, next) {
         try {
-            const  { username,password }  = req.body;
-            const create_admiin = await superAdminServices.createAdmin({ username,password });
-        
+            const { username, password } = req.body;
+            const create_admiin = await superAdminServices.createAdmin({ username, password });
+
             SuccessHandlerUtil.handleAdd(res, next, create_admiin);
         } catch (error) {
             next(error);
@@ -26,11 +26,11 @@ export default class UsersController {
 
 
     static async addTable(req, res, next) {
-        console.log(req.body,'info2313213');
+        console.log(req.body, 'info2313213');
         try {
-            const  info  = req.body;
-            const superAdmin = await superAdminServices.addTable({info});
-        
+            const info = req.body;
+            const superAdmin = await superAdminServices.addTable({ info });
+
             SuccessHandlerUtil.handleAdd(res, next, superAdmin);
         } catch (error) {
             console.log('111');
@@ -39,9 +39,9 @@ export default class UsersController {
     }
     static async dropTable(req, res, next) {
         try {
-            const  dropInfo  = req.body;
-            const superAdmin = await superAdminServices.dropTable({dropInfo});
-            
+            const dropInfo = req.body;
+            const superAdmin = await superAdminServices.dropTable({ dropInfo });
+
             SuccessHandlerUtil.handleAdd(res, next, superAdmin);
         } catch (error) {
             console.log('111');
@@ -50,14 +50,14 @@ export default class UsersController {
     }
     static async dropColumn(req, res, next) {
         try {
-            const  dropColumn  = req.body;
-            const superAdmin = await superAdminServices.dropColumn({dropColumn});
+            const dropColumn = req.body;
+            const superAdmin = await superAdminServices.dropColumn({ dropColumn });
             console.log(superAdmin, 7878787878787);
-            if(superAdmin) {
-                if(superAdmin[1][0].value) {
+            if (superAdmin) {
+                if (superAdmin[1][0].value) {
                     const pathToFile = superAdmin[1][0].value;
-                    
-                    fs.unlink(pathToFile, function(err) {
+
+                    fs.unlink(pathToFile, function (err) {
                         if (err) {
                             throw err;
                         } else {
@@ -74,21 +74,21 @@ export default class UsersController {
     }
     static async changeTableName(req, res, next) {
         try {
-            const  editTableName  = req.body;
-            const superAdmin = await superAdminServices.changeTableName({editTableName});
-            
+            const editTableName = req.body;
+            const superAdmin = await superAdminServices.changeTableName({ editTableName });
+
             SuccessHandlerUtil.handleAdd(res, next, superAdmin);
         } catch (error) {
             console.log('111');
             next(error);
         }
     }
-    
+
     static async changeColumnName(req, res, next) {
         try {
-            const  editColumneName  = req.body;
-            const superAdmin = await superAdminServices.changeColumnName({editColumneName});
-            
+            const editColumneName = req.body;
+            const superAdmin = await superAdminServices.changeColumnName({ editColumneName });
+
             SuccessHandlerUtil.handleAdd(res, next, superAdmin);
         } catch (error) {
             console.log('111');
@@ -96,11 +96,11 @@ export default class UsersController {
         }
     }
     static async addColumn(req, res, next) {
-        console.log(req.body,'dnvbjkfsd');
+        console.log(req.body, 'dnvbjkfsd');
         try {
-            const  addColumn  = req.body;
-            const superAdmin = await superAdminServices.addColumn({addColumn});
-            
+            const addColumn = req.body;
+            const superAdmin = await superAdminServices.addColumn({ addColumn });
+
             SuccessHandlerUtil.handleAdd(res, next, superAdmin);
         } catch (error) {
             console.log('111');
@@ -110,19 +110,19 @@ export default class UsersController {
     static async getColumns(req, res, next) {
         try {
             const superAdmin = await superAdminServices.getColumns();
-            
+
             SuccessHandlerUtil.handleAdd(res, next, superAdmin);
         } catch (error) {
             console.log('111');
             next(error);
         }
     }
-    
+
     static async insertValues(req, res, next) {
         try {
-            const  insertingData = req.body;
+            const insertingData = req.body;
             const superAdmin = await superAdminServices.insertValues(insertingData);
-            
+
             SuccessHandlerUtil.handleAdd(res, next, superAdmin);
         } catch (error) {
             console.log('111');
@@ -131,9 +131,9 @@ export default class UsersController {
     }
     static async getPrice(req, res, next) {
         try {
-            const  tableNames = req.body;
+            const tableNames = req.body;
             const superAdmin = await superAdminServices.getPrice(tableNames);
-            
+
             SuccessHandlerUtil.handleAdd(res, next, superAdmin);
         } catch (error) {
             console.log('111');
@@ -146,10 +146,10 @@ export default class UsersController {
 
     static async changeLoginOptions(req, res, next) {
         try {
-            const editLoginOptions  = req.body;
+            const editLoginOptions = req.body;
             editLoginOptions.id = 1;
 
-            
+
             const changes = await superAdminServices.changeLoginOptions(editLoginOptions);
             SuccessHandlerUtil.handleAdd(res, next, changes);
             // res.send(changes);
@@ -163,9 +163,9 @@ export default class UsersController {
             const { id } = req.params;
             console.log(id);
             const user = await superAdminServices.getLoginOptionsById(id);
-            
 
-            SuccessHandlerUtil.handleGet(res, next, { ...user});
+
+            SuccessHandlerUtil.handleGet(res, next, { ...user });
         } catch (error) {
             next(error);
         }
@@ -173,11 +173,11 @@ export default class UsersController {
 
     static async addPic(req, res, next) {
         try {
-            const {file} = req;
+            const { file } = req;
             const { originalname, filename, path } = file;
 
-            const dirname =  `${HOST_OF_SERVER}/` + path;
-            SuccessHandlerUtil.handleAdd(res, next, { originalname, filename, dirname, success: true  });
+            const dirname = `${HOST_OF_SERVER}/` + path;
+            SuccessHandlerUtil.handleAdd(res, next, { originalname, filename, dirname, success: true });
         } catch (error) {
             next(error);
         }
@@ -185,8 +185,8 @@ export default class UsersController {
 
     static async changeSettings(req, res, next) {
         try {
-            const editLoginOptions  = req.body;
-            editLoginOptions.id = 1;        
+            const editLoginOptions = req.body;
+            editLoginOptions.id = 1;
             // let dirname = `${HOST_OF_SERVER}/upload/` + editLoginOptions.logo;
             // editLoginOptions.logo = dirname;
 
@@ -202,7 +202,7 @@ export default class UsersController {
             const { id } = req.params;
             const user = await superAdminServices.getSettingsById(id);
 
-            SuccessHandlerUtil.handleGet(res, next, { ...user});
+            SuccessHandlerUtil.handleGet(res, next, { ...user });
         } catch (error) {
             next(error);
         }
@@ -213,7 +213,7 @@ export default class UsersController {
             const { title_div } = req.query;
             const data = await superAdminServices.getStylesByTitleDiv(title_div);
 
-            SuccessHandlerUtil.handleGet(res, next, { ...data});
+            SuccessHandlerUtil.handleGet(res, next, { ...data });
         } catch (error) {
             next(error);
         }
@@ -222,7 +222,7 @@ export default class UsersController {
 
     static async changeStyles(req, res, next) {
         try {
-            const editStyles  = req.body;
+            const editStyles = req.body;
             // let dirname = `${HOST_OF_SERVER}/upload/` + editStyles.image;
             // editStyles.image = dirname;
 
@@ -237,11 +237,12 @@ export default class UsersController {
         try {
             const { id } = req.params;
             const deletedUser = await superAdminServices.deleteForStyles(id);
-            if(deletedUser) {
-                if(deletedUser[0].image) {
+            if (deletedUser) {
+                if (deletedUser[0].image) {
                     const pathToFile = deletedUser[0].image;
-                    
-                    fs.unlink(pathToFile, function(err) {
+                    const splitedUrl = pathToFile.split('/');
+
+                    fs.unlink(`upload/${splitedUrl[splitedUrl.length - 1]}`, function (err) {
                         if (err) {
                             throw err;
                         } else {
@@ -282,11 +283,12 @@ export default class UsersController {
         try {
             const { id } = req.params;
             const deletedUser = await superAdminServices.deleteForHome(id);
-            if(deletedUser) {
-                if(deletedUser[0].image) {
+            if (deletedUser) {
+                if (deletedUser[0].image) {
                     const pathToFile = deletedUser[0].image;
-                    
-                    fs.unlink(pathToFile, function(err) {
+                    const splitedUrl = pathToFile.split('/');
+
+                    fs.unlink(`upload/${splitedUrl[splitedUrl.length - 1]}`, function (err) {
                         if (err) {
                             throw err;
                         } else {
@@ -307,7 +309,7 @@ export default class UsersController {
             const { title_div } = req.query;
             const data = await superAdminServices.getAboutByTitleDiv(title_div);
 
-            SuccessHandlerUtil.handleGet(res, next, { ...data});
+            SuccessHandlerUtil.handleGet(res, next, { ...data });
         } catch (error) {
             next(error);
         }
@@ -318,7 +320,7 @@ export default class UsersController {
 
             const data = await superAdminServices.getHomeByTitleDiv();
 
-            SuccessHandlerUtil.handleGet(res, next, { ...data});
+            SuccessHandlerUtil.handleGet(res, next, { ...data });
         } catch (error) {
             next(error);
         }
@@ -328,7 +330,7 @@ export default class UsersController {
         try {
             const data = await superAdminServices.getTerms();
 
-            SuccessHandlerUtil.handleGet(res, next, { ...data});
+            SuccessHandlerUtil.handleGet(res, next, { ...data });
         } catch (error) {
             next(error);
         }
@@ -336,7 +338,7 @@ export default class UsersController {
 
     static async changeAbout(req, res, next) {
         try {
-            const editStyles  = req.body;
+            const editStyles = req.body;
             // let dirname = `${HOST_OF_SERVER}/upload/` + editStyles.image;
             // editStyles.image = dirname;
 
@@ -349,7 +351,7 @@ export default class UsersController {
 
     static async changeTerms(req, res, next) {
         try {
-            const editTerms  = req.body;
+            const editTerms = req.body;
             // let dirname = `${HOST_OF_SERVER}/upload/` + editStyles.image;
             // editStyles.image = dirname;
 
@@ -404,7 +406,7 @@ export default class UsersController {
 
 
     static async getPDF(req, res, next) {
-        try {                
+        try {
             const data = await GeneratePDF.generateingPDF();
             // console.log(data);
             const superAdmin = await superAdminServices.getPDF(data);
@@ -418,7 +420,7 @@ export default class UsersController {
 
     static async createPDF(req, res, next) {
         try {
-            console.log(req.body,1111);
+            console.log(req.body, 1111);
             const data = req.body;
             const newData = await superAdminServices.createPDF(data);
 
@@ -427,7 +429,7 @@ export default class UsersController {
             next(error);
         }
     }
-    
+
 
     static async getMessages(req, res, next) {
         try {
@@ -442,7 +444,7 @@ export default class UsersController {
 
     static async deleteMessage(req, res, next) {
         try {
-            const {id} = req.params;
+            const { id } = req.params;
             const superAdmin = await superAdminServices.deleteMessage(id);
 
             SuccessHandlerUtil.handleGet(res, next, superAdmin);
@@ -454,8 +456,8 @@ export default class UsersController {
 
     static async changeMessageStatus(req, res, next) {
         try {
-            const {id} = req.params;
-            const {seen}  = req.body;
+            const { id } = req.params;
+            const { seen } = req.body;
 
             const changes = await superAdminServices.changeMessageStatus(id, seen);
             SuccessHandlerUtil.handleAdd(res, next, changes);
@@ -499,7 +501,7 @@ export default class UsersController {
             next(error);
         }
     }
-    
+
     static async changeBoxParams(req, res, next) {
         try {
             const data = req.body;

@@ -1,17 +1,17 @@
-import { UsersSchema } from './schemes';
+import { UsersSchemes } from './schemes';
 import ValidatorUtil from './util/validator.util';
 
 class UsersValidation {
     static validateGetByIdArgs(req, res, next) {
-        ValidatorUtil.validateArgs(req, UsersSchema.getByIdSchema, next);
+        ValidatorUtil.validateArgs(req, UsersSchemes.getByIdSchema, next);
     }
 
     static validateAddArgs(req, res, next) {
-        ValidatorUtil.validateArgs(req, UsersSchema.addSchema, next);
+        ValidatorUtil.validateArgs(req, UsersSchemes.addSchema, next);
     }
 
     static validateEditArgs(req, res, next) {
-        ValidatorUtil.validateArgs(req, UsersSchema.editSchema, next);
+        ValidatorUtil.validateArgs(req, UsersSchemes.editSchema, next);
     }
     
 }

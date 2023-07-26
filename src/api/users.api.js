@@ -3,15 +3,15 @@ import express from 'express';
 
 // Local Modules
 import { UsersController } from '../controller';
-import UsersValidation from '../middlewares/validation/users.validation';
 import AuthMiddlaware from '../auth/auth.middlware';
+import { UsersValidationMiddleware } from '../middlewares/validation';
 // import AuthMiddlaware from '../auth/auth.middlware';
 // import { UsersValidationMiddleware } from '../middlewares/validation';
 // import { ImageUploadMiddleware } from '../middlewares/image-upload.middleware';
 const router = express.Router();
 
 router.post('/add',
-    UsersValidation.validateAddArgs,
+    UsersValidationMiddleware.validateAddArgs,
     UsersController.add);
 
 router.post(
@@ -65,27 +65,27 @@ router.post(
 // Shipo
 
 router.post('/shippo',
-    // UsersValidation.validateAddArgs,
+    // UsersValidationMiddleware.validateAddArgs,
     UsersController.shippo);
 
 router.post('/createShip',
-    // UsersValidation.validateAddArgs,
+    // UsersValidationMiddleware.validateAddArgs,
     UsersController.createShip);
 
 router.get('/returningShip/:id',
-    // UsersValidation.validateAddArgs,
+    // UsersValidationMiddleware.validateAddArgs,
     UsersController.returningShip);
 
 router.post('/rateDetails',
-    // UsersValidation.validateAddArgs,
+    // UsersValidationMiddleware.validateAddArgs,
     UsersController.rateDetails);
 
 router.get('/rateDetails/:id',
-    // UsersValidation.validateAddArgs,
+    // UsersValidationMiddleware.validateAddArgs,
     UsersController.getRateDetails);
 router.delete(
     '/cancelShippoOrder/:object_id',
-    // UsersValidation.validateAddArgs,
+    // UsersValidationMiddleware.validateAddArgs,
     UsersController.cancelShippoOrder
 );
 
