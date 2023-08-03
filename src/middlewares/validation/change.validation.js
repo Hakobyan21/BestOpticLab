@@ -34,6 +34,10 @@ class ChangeValidation {
         ValidatorUtil.validateArgs(req, ChangeSchemes.changeById, next);
     }
 
+    static validateChangeCompanySettingsArgs(req, res, next) {
+        ValidatorUtil.validateArgs(req, ChangeSchemes.changeCompanySettings, next);
+    }
+
    
     
 }

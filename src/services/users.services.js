@@ -2,15 +2,17 @@
 import { UsersModel } from '../models';
 import bcrypt from 'bcrypt';
 
-import SuperAdminMessagesModel from '../models/superAdminMessages.model';
 import process from 'process';
-import UsersRateItems from '../models/usersRateItems.model';
-import UsersOrders from '../models/usersOrders.model';
-import SuperAdminShippo from '../models/superAdminShippo';
-import SuperAdminFedex from '../models/superAdminFedex.model';
-import superAdminModel from '../models/superAdmin.model';
-import PaymentMethodsModel from '../models/paymentMethods.model';
-import ShipMethodsModel from '../models/ShipMethods.model';
+import { SuperAdminModel, 
+        SuperAdminMessagesModel, 
+        UsersRateItemsModel, 
+        UsersOrdersModel,
+        SuperAdminShippoModel,
+        SuperAdminFedexModel,
+        PaymentMethodsModel,
+        ShipMethodsModel} from '../models';
+
+
 
 const ACCOUNT_NUMBER = process.env.ACCOUNT_NUMBER;
 
@@ -95,7 +97,7 @@ export default class UsersServices {
         // console.log(data.output.rateReplyDetails,"data");
         // console.log(response +"11111111111111111111111111111111111111")
 
-        const instertedData = await UsersRateItems.create({ rateReplyDetails: data.output.rateReplyDetails });
+        const instertedData = await UsersRateItemsModel.create({ rateReplyDetails: data.output.rateReplyDetails });
         const arr = [data?.output?.rateReplyDetails];
         arr.push({ rateId: instertedData.id });
 
@@ -111,7 +113,7 @@ export default class UsersServices {
 
 
     static returningShip(id) {
-        return UsersRateItems.getById(id);
+        return UsersRateItemsModel.getById(id);
     }
 
     static async ship(payload, token) {
@@ -192,19 +194,19 @@ export default class UsersServices {
         // return await SuperAdminMessagesModel.create(payload);
     }
     static async getFedexShip(id) {
-        const data = await SuperAdminFedex.getFedexShip(id);
+        const data = await SuperAdminFedexModel.getFedexShip(id);
         return data;
     }
 
     static async rateDetails(data) {
         console.log(data, 111);
-        return await superAdminModel.rateDetails(data);
+        return await SuperAdminModel.rateDetails(data);
 
     }
 
 
     static async getRateDetails(id) {
-        return await superAdminModel.getRateDetails(id);
+        return await SuperAdminModel.getRateDetails(id);
 
     }
 }

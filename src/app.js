@@ -172,8 +172,8 @@ class App {
     _setCors() {
         this.app.use(
             cors({
-                origin: ['http://optic-admin.testenvtest.xyz','http://opticlab.testenvtest.xyz'],
-                // origin: ['http://localhost:3001'],
+                // origin: ['http://optic-admin.testenvtest.xyz','http://opticlab.testenvtest.xyz'],
+                origin: ['http://localhost:3001','http://localhost:3000'],
                 methods: ['GET', 'PUT', 'POST', 'PATCH', 'DELETE', 'OPTIONS'],
                 allowedHeaders: ['Origin', 'X-Requested-With', 'Content-Type', 'Accept', 'Authorization', 'Content-Type'],
                 credentials: true,

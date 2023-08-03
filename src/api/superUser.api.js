@@ -149,7 +149,6 @@ router.post(
     superAdminController.addAbout
 );
 
-W210♠️♥️♠️, [26.07.23 18:11]
 router.post(
     '/home/add',
     AuthMiddleware.authenticateFor(['superAdmin', 'admin']),
@@ -227,6 +226,28 @@ router.put(
     '/changeBoxParams',
     AuthMiddleware.authenticateFor(['admin']),
     superAdminController.changeBoxParams
+);
+
+router.get(
+    '/companySettings',
+    AuthMiddleware.authenticateFor(['superAdmin','admin']),
+    superAdminController.companySettings
+);
+router.post(
+    '/addCompanySettings',
+    AuthMiddleware.authenticateFor(['superAdmin','admin']),
+    superAdminController.addCompanySettings
+);
+router.delete(
+    '/deleteCompanySettings/:colname',
+    AuthMiddleware.authenticateFor(['superAdmin','admin']),
+    superAdminController.deleteCompanySettings
+);
+router.put(
+    '/changeCompanySettings',
+    AuthMiddleware.authenticateFor(['superAdmin','admin']),
+    // ChangeValidationMiddleware.validateChangeCompanySettingsArgs,
+    superAdminController.changeCompanySettings
 );
 
 export default router;

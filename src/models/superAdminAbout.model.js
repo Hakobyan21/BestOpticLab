@@ -36,7 +36,7 @@ class SuperAdminAboutModel extends Model {
     }
 
     static getByTitleDiv(title_div){
-        return SuperAdminAboutModel.query().select('*').where('title_div', '=', title_div);
+        return SuperAdminAboutModel.query().select('*').where('title_div', '=', title_div).orderBy('id  ');
     }
 
     static async create(payload) {

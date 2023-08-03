@@ -171,12 +171,14 @@ export default class UsersController {
         }
     }
 
-    static async addPic(req, res, next) {
+    static async  addPic(req, res, next) {
         try {
             const { file } = req;
             const { originalname, filename, path } = file;
+            console.log(file,'file');
 
             const dirname = `${HOST_OF_SERVER}/` + path;
+            console.log(dirname,'dirname');
             SuccessHandlerUtil.handleAdd(res, next, { originalname, filename, dirname, success: true });
         } catch (error) {
             next(error);
@@ -260,6 +262,7 @@ export default class UsersController {
     static async addStyle(req, res, next) {
         try {
             const style = req.body;
+            console.log(style,'style');
             const newUser = await superAdminServices.addStyle(style);
 
             SuccessHandlerUtil.handleAdd(res, next, newUser);
@@ -339,6 +342,7 @@ export default class UsersController {
     static async changeAbout(req, res, next) {
         try {
             const editStyles = req.body;
+            console.log(editStyles,'editStyles');
             // let dirname = `${HOST_OF_SERVER}/upload/` + editStyles.image;
             // editStyles.image = dirname;
 
@@ -512,4 +516,47 @@ export default class UsersController {
             next(error);
         }
     }
+    static async companySettings(req, res, next) {
+        try {
+            const result = await superAdminServices.companySettings();
+
+            SuccessHandlerUtil.handleAdd(res, next, result);
+        } catch (error) {
+            next(error);
+        }
+    }
+    static async changeCompanySettings(req, res, next) {
+        try {
+            const data = req.body;
+            const result = await superAdminServices.changeCompanySettings(data);
+
+            SuccessHandlerUtil.handleAdd(res, next, result);
+        } catch (error) {
+            next(error);
+        }
+    }
+    static async addCompanySettings(req, res, next) {
+        try {
+            const data = req.body;
+            const result = await superAdminServices.addCompanySettings(data);
+
+            SuccessHandlerUtil.handleAdd(res, next, result);
+        } catch (error) {
+            next(error);
+        }
+    }
+    static async deleteCompanySettings(req, res, next) {
+        try {
+            const colname = req.params.colname;
+            const result = await superAdminServices.deleteCompanySettings(colname);
+
+            SuccessHandlerUtil.handleAdd(res, next, result);
+        } catch (error) {
+            next(error);
+        }
+    }
+    
+    
+
+    
 }

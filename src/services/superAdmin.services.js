@@ -4,49 +4,51 @@ import fs from 'fs';
 import nodemailer from 'nodemailer'; 
 import bcrypt from 'bcrypt';
 
-import { superAdminModel } from '../models';
-import SuperAdminLoginModel from '../models/superAdminLogin.model';
-import SuperAdminSettingsModel from '../models/superAdminSettings.model';
-import SuperAdminStylesModel from '../models/superAdminStyles.model';
-import SuperAdminAboutModel from '../models/superAdminAbout.model';
-import SuperAdminHomeModel from '../models/superAdminHome.model';
-import SuperAdminTermsModel from '../models/superAdminTerms.model';
-import SuperAdminMessagesModel from '../models/superAdminMessages.model';
+import { SuperAdminModel,
+         CompanySettingsModel, 
+         SuperAdminLoginModel, 
+         SuperAdminSettingsModel, 
+         SuperAdminStylesModel, 
+         SuperAdminAboutModel, 
+         SuperAdminHomeModel, 
+         SuperAdminTermsModel, 
+         SuperAdminMessagesModel } from '../models';
+
 
 export default class SuperAdminServices {
     
     static async createAdmin(info){
         const password = await bcrypt.hash(info.password, 10);
         delete info.password;
-        return superAdminModel.createAdmin({...info, password});
+        return SuperAdminModel.createAdmin({...info, password});
     }
     static async addTable(info){
-        return superAdminModel.addTable(info);
+        return SuperAdminModel.addTable(info);
     }
     static async dropTable(dropInfo){
-        return superAdminModel.dropTable(dropInfo);
+        return SuperAdminModel.dropTable(dropInfo);
     }
     static async dropColumn(dropColumn){
-        return superAdminModel.dropColumn(dropColumn);
+        return SuperAdminModel.dropColumn(dropColumn);
     }
     static async changeTableName(editTableName){
-        return superAdminModel.changeTableName(editTableName);
+        return SuperAdminModel.changeTableName(editTableName);
     }
     static async changeColumnName(editColumnName){
-        return superAdminModel.changeColumnName(editColumnName);
+        return SuperAdminModel.changeColumnName(editColumnName);
     }
     static async addColumn(addColumn){
-        return superAdminModel.addColumn(addColumn);
+        return SuperAdminModel.addColumn(addColumn);
     }
     static async getColumns(id){
-        return superAdminModel.getColumns(id);
+        return SuperAdminModel.getColumns(id);
     }
     
     static async insertValues(insertingData){
-        return superAdminModel.insertValues(insertingData);
+        return SuperAdminModel.insertValues(insertingData);
     }
     static async getPrice(tableNames){
-        return superAdminModel.getPrice(tableNames);
+        return SuperAdminModel.getPrice(tableNames);
     }
 
     static async changeLoginOptions(update){
@@ -126,7 +128,7 @@ export default class SuperAdminServices {
 
 
     static async getPDF(data){
-        return superAdminModel.getPDF(data);
+        return SuperAdminModel.getPDF(data);
     }
     
     static createPDF(data) {
@@ -207,17 +209,32 @@ export default class SuperAdminServices {
 
 
     static changeCompanyData(user) {
-        return superAdminModel.changeCompanyData(user);
+        return SuperAdminModel.changeCompanyData(user);
     }
 
 
 
     static addBoxParams(payload) {
-        return superAdminModel.addBoxParams(payload);
+        return SuperAdminModel.addBoxParams(payload);
     }
 
 
     static changeBoxParams(payload) {
-        return superAdminModel.changeBoxParams(payload);
+        return SuperAdminModel.changeBoxParams(payload);
     }
+    
+    static companySettings() {
+        return CompanySettingsModel.companySettings();
+    }
+    static changeCompanySettings(data) {
+        return CompanySettingsModel.changeCompanySettings(data);
+    }
+    static addCompanySettings(data) {
+        return CompanySettingsModel.addCompanySettings(data);
+    }
+    static deleteCompanySettings(colname) {
+        return CompanySettingsModel.deleteCompanySettings(colname);
+    }
+     
+    
 }

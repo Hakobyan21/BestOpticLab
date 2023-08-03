@@ -65,6 +65,7 @@ function up(pg) {
             table.string('title');
             table.text('text');
             table.string('image');
+            table.string('color');
             table.text('note');
             table.dateTime('created_at');
             table.dateTime('updated_at');
@@ -121,32 +122,32 @@ function up(pg) {
         })
         .createTable('pdfFiles', (table) => {
             table.increments('id').primary();
-            table.string('pdfName')          
+            table.string('pdfName');          
             table.dateTime('created_at');
         })
         .createTable('our_address', (table) => {
             table.increments('id').primary();
-            table.string('name')   
-            table.string('company')          
-            table.string('street1')          
-            table.string('street2')          
-            table.string('city')          
-            table.string('state')          
-            table.string('zip')          
-            table.string('country')          
-            table.string('phone')  
-            table.string('email')
-            table.string('metadata')          
+            table.string('name');   
+            table.string('company');          
+            table.string('street1');          
+            table.string('street2');          
+            table.string('city');          
+            table.string('state');          
+            table.string('zip');          
+            table.string('country');          
+            table.string('phone');  
+            table.string('email');
+            table.string('metadata');          
             table.dateTime('created_at');
         })
         .createTable('shippo', (table) => {
             table.increments('id').primary();
-            table.string('provider')
-            table.string('estimated_days')          
-            table.string('duration_terms')
-            table.string('object_id')
-            table.string('amount')
-            table.string('currency')            
+            table.string('provider');
+            table.string('estimated_days');          
+            table.string('duration_terms');
+            table.string('object_id');
+            table.string('amount');
+            table.string('currency');            
             table.dateTime('created_at');
             table.dateTime('updated_at');
         })
@@ -189,6 +190,17 @@ function up(pg) {
             table.specificType('order', 'text[]');
             table.dateTime('created_at');
         })
+        .createTable('company_settings', (table) => {
+            table.increments('id').primary();
+            table.string('logo');
+            table.string('phone');
+            table.string('director');
+            table.string('company_name');
+            table.string('company_address');
+            table.dateTime('created_at');
+            table.dateTime('updated_at');
+
+        });
 }
 
 async function init() {

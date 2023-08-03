@@ -21,12 +21,13 @@ const AddSchema = {
 
     addStyles: {
         body: Joi.object({
-            title_div: Joi.string().required(),
-            title: Joi.string().required(),
+            title_div: Joi.string(),
+            title: Joi.string(),
             text: Joi.string(),
-            image: Joi.string().uri(),
+            image: Joi.string(),
+            color: Joi.string(),
             note: Joi.string()
-          })
+        })
     },
     
     addAbout: {
@@ -35,7 +36,7 @@ const AddSchema = {
             title: Joi.string().required(),
             text: Joi.string(),
             image: Joi.string().uri()
-          })
+        })
     },
     
     addToHome: {
@@ -62,7 +63,7 @@ const AddSchema = {
             email: Joi.string().email().required(),
             subject: Joi.string().required(),
             message: Joi.string().required()
-          })
+        })
     }
 
     

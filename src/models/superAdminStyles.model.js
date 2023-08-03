@@ -40,6 +40,7 @@ class SuperAdminStylesModel extends Model {
     }
 
     static async create(payload) {
+        console.log(payload,'payl/oad');
         return SuperAdminStylesModel.query().insert(payload);
     }
 

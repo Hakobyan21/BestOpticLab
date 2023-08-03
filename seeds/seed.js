@@ -81,8 +81,8 @@ async function seed(pg) {
         {
             title_div: 'Mirror Colors',
             title: 'BLACK',
-            text: 'black',
-            image: `${API}/upload/black_color.jpg`,
+            text: 'A classic dark and smoky mirror best for sun lenses',
+            color: '#000000',
             note: 'Note: The lens images above are only representations of the actual color. Actual lens colors and appearance will vary based on lighting conditions, applied base tint color, and viewing angles. Mirror color illustrations shown above are for solid mirrors only. Flash mirrors are now shown in the illustrations above.',
             created_at: new Date().toISOString(),
             updated_at: new Date().toISOString(),
@@ -91,8 +91,8 @@ async function seed(pg) {
         {
             title_div: 'Mirror Colors',
             title: 'BLUE',
-            text: 'blue',
-            image: `${API}/upload/blue_color.jpg`,
+            text: 'A chill blue color for a stylish and trendy look',
+            color: '#0000ff',
             note: 'Note: The lens images above are only representations of the actual color. Actual lens colors and appearance will vary based on lighting conditions, applied base tint color, and viewing angles. Mirror color illustrations shown above are for solid mirrors only. Flash mirrors are now shown in the illustrations above.',
             created_at: new Date().toISOString(),
             updated_at: new Date().toISOString(),
@@ -101,8 +101,8 @@ async function seed(pg) {
         {
             title_div: 'Mirror Colors',
             title: 'COBALT',
-            text: 'cobalt',
-            image: `${API}/upload/cobalt_color.jpg`,
+            text: 'A soft sapphire shade for a soothing cosmetic appearance',
+            color: '#0047ab',
             note: 'Note: The lens images above are only representations of the actual color. Actual lens colors and appearance will vary based on lighting conditions, applied base tint color, and viewing angles. Mirror color illustrations shown above are for solid mirrors only. Flash mirrors are now shown in the illustrations above.',
             created_at: new Date().toISOString(),
             updated_at: new Date().toISOString(),
@@ -111,8 +111,8 @@ async function seed(pg) {
         {
             title_div: 'Mirror Colors',
             title: 'ORANGE',
-            text: 'orange',
-            image: `${API}/upload/orange_color.jpg`,
+            text: 'A fresh tropical look for a vibrant personality',
+            color: '#ffa500',
             note: 'Note: The lens images above are only representations of the actual color. Actual lens colors and appearance will vary based on lighting conditions, applied base tint color, and viewing angles. Mirror color illustrations shown above are for solid mirrors only. Flash mirrors are now shown in the illustrations above.',
             created_at: new Date().toISOString(),
             updated_at: new Date().toISOString(),
@@ -121,18 +121,17 @@ async function seed(pg) {
         {
             title_div: 'Mirror Colors',
             title: 'GOLD',
-            text: 'gold',
-            image: `${API}/upload/gold_color.jpg`,
+            text: 'A smooth and warm shade for an affluent appearance',
+            color: '#ffd700',
             note: 'Note: The lens images above are only representations of the actual color. Actual lens colors and appearance will vary based on lighting conditions, applied base tint color, and viewing angles. Mirror color illustrations shown above are for solid mirrors only. Flash mirrors are now shown in the illustrations above.',
             created_at: new Date().toISOString(),
             updated_at: new Date().toISOString(),
         },
-
         {
             title_div: 'Mirror Colors',
             title: 'GREEN',
-            text: 'green',
-            image: `${API}/upload/green_color.jpg`,
+            text: 'A radiant green filled with life and an earthy feeling ',
+            color: '#008000',
             note: 'Note: The lens images above are only representations of the actual color. Actual lens colors and appearance will vary based on lighting conditions, applied base tint color, and viewing angles. Mirror color illustrations shown above are for solid mirrors only. Flash mirrors are now shown in the illustrations above.',
             created_at: new Date().toISOString(),
             updated_at: new Date().toISOString(),
@@ -141,8 +140,8 @@ async function seed(pg) {
         {
             title_div: 'Mirror Colors',
             title: 'PINK',
-            text: 'pink',
-            image: `${API}/upload/pink_color.jpg`,
+            text: 'An infusion of crimson hues',
+            color: '#ffc0cb',
             note: 'Note: The lens images above are only representations of the actual color. Actual lens colors and appearance will vary based on lighting conditions, applied base tint color, and viewing angles. Mirror color illustrations shown above are for solid mirrors only. Flash mirrors are now shown in the illustrations above.',
             created_at: new Date().toISOString(),
             updated_at: new Date().toISOString(),
@@ -151,8 +150,8 @@ async function seed(pg) {
         {
             title_div: 'Mirror Colors',
             title: 'RED',
-            text: 'red',
-            image: `${API}/upload/red_color.jpg`,
+            text: 'A rich scarlet mirror for a sporty experience',
+            color: '#ff0000',
             note: 'Note: The lens images above are only representations of the actual color. Actual lens colors and appearance will vary based on lighting conditions, applied base tint color, and viewing angles. Mirror color illustrations shown above are for solid mirrors only. Flash mirrors are now shown in the illustrations above.',
             created_at: new Date().toISOString(),
             updated_at: new Date().toISOString(),
@@ -161,8 +160,8 @@ async function seed(pg) {
         {
             title_div: 'Mirror Colors',
             title: 'SILVER',
-            text: 'silver',
-            image: `${API}/upload/silver_color.jpg`,
+            text: 'A classic silver gray color for ttraditional looks',
+            color: '#c0c0c0',
             note: 'Note: The lens images above are only representations of the actual color. Actual lens colors and appearance will vary based on lighting conditions, applied base tint color, and viewing angles. Mirror color illustrations shown above are for solid mirrors only. Flash mirrors are now shown in the illustrations above.',
             created_at: new Date().toISOString(),
             updated_at: new Date().toISOString(),
@@ -193,6 +192,7 @@ async function seed(pg) {
             title_div: 'Products and Services',
             title: 'Metal Frame Recoloring',
             text: 'We also recolor metal frames with any color.',
+            image: `${API}/upload/img4.webp`,
             created_at: new Date().toISOString(),
             updated_at: new Date().toISOString(),
         },
@@ -280,6 +280,27 @@ async function seed(pg) {
             icon: `${API}/upload/6aeec8c2-9311-4be5-a088-5930819f9d46.png`,
             created_at: new Date().toISOString(),
         }
+    ]);
+
+    await pg('company_settings').insert([
+        {
+            logo:  `${API}/upload/7d0c6fdd-87b0-4209-8a02-ebcc2f7b437f.png`,
+            phone: '818-649-1799',
+            director: 'Mr director',  // change
+            company_name: 'Best Optic Lab',
+            company_address: '820 Thompson Ave, Ste 30 Glendale, CA 91201',
+            created_at: new Date().toISOString(),
+        },
+    ]);
+    await pg('company_settings').insert([
+        {
+            logo:  `${API}/upload/7d0c6fdd-87b0-4209-8a02-ebcc2f7b437f.png`,
+            phone: '818-649-1799',
+            director: 'Mr director',  // change
+            company_name: 'Best Optic Lab',
+            company_address: '820 Thompson Ave, Ste 30 Glendale, CA 91201',
+            created_at: new Date().toISOString(),
+        },
     ]);
 }
 

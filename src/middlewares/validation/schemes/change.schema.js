@@ -51,9 +51,10 @@ const ChangeSchema = {
             title_div: Joi.string(),
             title: Joi.string(),
             text: Joi.string(),
-            image: Joi.string().uri(),
+            image: Joi.string(),
+            color: Joi.string(),
             note: Joi.string().allow(null)
-          })
+        })
     },
 
     changeAbout: {
@@ -62,8 +63,8 @@ const ChangeSchema = {
             title_div: Joi.string(),
             title: Joi.string(),
             text: Joi.string(),
-            image: Joi.string().uri()
-          })
+            image: Joi.string()
+        })
     },
 
     changeTerms: {
@@ -80,10 +81,19 @@ const ChangeSchema = {
 
     changeById: {
         params: Joi.object({
-          id: ID.required()
+            id: ID.required()
         })
-      }
+    },
 
+    changeCompanySettings: {
+        body: Joi.object({
+            logo: Joi.string(),
+            phone: Joi.string(),
+            director: Joi.string(),
+            company_name: Joi.string(),
+            company_address: Joi.string()
+        })
+    },
 };
 
 export default ChangeSchema;

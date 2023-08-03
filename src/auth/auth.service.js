@@ -54,6 +54,7 @@ export default class AuthService {
     static async login(username, password) {
         if(username) {
             const user = await AuthModel.findByUsername(username);
+            console.log(user,'user');
             if (!user) {
                 const admin = await AdminModels.findByUsername(username);
                 if(!admin) throw new InputValidationError('Invalid username or password');
