@@ -102,7 +102,7 @@ function up(pg) {
             table.increments('id').primary();
             table.string('email').notNullable();
             table.string('name').notNullable();            
-            table.string('message').notNullable();
+            table.text('message').notNullable();
             table.boolean('seen').defaultTo(false);            
             table.dateTime('created_at');
             table.dateTime('updated_at');

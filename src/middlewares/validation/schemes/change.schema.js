@@ -16,7 +16,7 @@ const ChangeSchema = {
 
     changeLoginOptions: {
         body: Joi.object({
-            title: Joi.string().required(),
+            title: Joi.string(),
             login_title: Joi.string(),
             password_title: Joi.string(),
             signUp_title: Joi.string(),

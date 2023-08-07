@@ -170,7 +170,6 @@ router.delete(
 
 router.get(
     '/terms',
-    AuthMiddleware.authenticateFor(['superAdmin', 'admin']),
     superAdminController.getTerms
 );
 

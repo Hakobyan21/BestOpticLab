@@ -152,7 +152,6 @@ export default class UsersController {
 
             const changes = await superAdminServices.changeLoginOptions(editLoginOptions);
             SuccessHandlerUtil.handleAdd(res, next, changes);
-            // res.send(changes);
         } catch (error) {
             next(error);
         }
