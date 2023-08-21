@@ -2,10 +2,6 @@
 import { Model } from 'objection';
 import { ErrorsUtil } from '../utils';
 
-// Local Modules
-// import Status from '../enum/status.enum';
-// import Role from '../enum/role.enum';
-
 const { InputValidationError } = ErrorsUtil;
 
 class PaymentMethodsModel extends Model {
@@ -31,15 +27,17 @@ class PaymentMethodsModel extends Model {
 
     // // Methods
     static getPaymentMethods() {
-        return PaymentMethodsModel.query().select('*').where('status', '=', true);
+        return PaymentMethodsModel.query().select('*').orderBy('id');
     }
 
-    static async changePaymentMethods(id) {
-        const method = await PaymentMethodsModel.query().select('*').whereIn('id', id);
-        if (method[0].status == true) {
-            return PaymentMethodsModel.query().update({ status: false }).whereIn('id', id).returning('*');
-        }
-        return PaymentMethodsModel.query().update({ status: true }).whereIn('id', id).returning('*');
+    static async changePaymentMethods(ids) {
+            let method = await PaymentMethodsModel.query().select('*').whereIn('id', ids);
+            for(let i = 0; i<method.length; i++) {
+                if (method[i].status == true) {
+                    return PaymentMethodsModel.query().update({ status: false }).whereIn('id', ids).returning('*');
+                }
+                return PaymentMethodsModel.query().update({ status: true }).whereIn('id', ids).returning('*');
+            }
     }
 
     // static delete (id) {

@@ -40,8 +40,8 @@ export default class UsersServices {
     }
 
 
-    static async changePaymentMethods(id) {
-        return await PaymentMethodsModel.changePaymentMethods(id);
+    static async changePaymentMethods(ids) {
+        return await PaymentMethodsModel.changePaymentMethods(ids);
     }
 
 

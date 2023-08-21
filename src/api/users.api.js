@@ -5,9 +5,7 @@ import express from 'express';
 import { UsersController } from '../controller';
 import AuthMiddlaware from '../auth/auth.middlware';
 import { UsersValidationMiddleware } from '../middlewares/validation';
-// import AuthMiddlaware from '../auth/auth.middlware';
-// import { UsersValidationMiddleware } from '../middlewares/validation';
-// import { ImageUploadMiddleware } from '../middlewares/image-upload.middleware';
+
 const router = express.Router();
 
 router.post('/add',
@@ -18,8 +16,6 @@ router.post(
     '/sendMessage',
     UsersController.sendMessage
 );
-
-
 
 
 
@@ -83,14 +79,12 @@ router.post('/rateDetails',
 router.get('/rateDetails/:id',
     // UsersValidationMiddleware.validateAddArgs,
     UsersController.getRateDetails);
+
 router.delete(
     '/cancelShippoOrder/:object_id',
     // UsersValidationMiddleware.validateAddArgs,
     UsersController.cancelShippoOrder
 );
-
-
-
 
 router.get('/paymentMethods', 
     UsersController.getPaymentMethods
@@ -100,7 +94,6 @@ router.put('/paymentMethods',
     // AuthMiddleware.authenticateFor(["admin"]),
     UsersController.changePaymentMethods    
 );
-
 
 router.get('/shipMethods', 
     // AuthMiddlaware.authenticateFor(["admin"]),

@@ -504,6 +504,16 @@ export default class UsersController {
             next(error);
         }
     }
+    static async getBoxParams(req, res, next) {
+        try {
+            const result = await superAdminServices.getBoxParams();
+
+            SuccessHandlerUtil.handleAdd(res, next, result);
+        } catch (error) {
+            next(error);
+        }
+    }
+    
 
     static async changeBoxParams(req, res, next) {
         try {

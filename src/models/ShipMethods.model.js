@@ -28,7 +28,7 @@ class ShipMethodsModel extends Model {
 
     // // Methods
     static getShipMethods() {
-        return ShipMethodsModel.query().select('*').where('status', '=', true);
+        return ShipMethodsModel.query().select('*').orderBy('id');
     }
 
     // static delete (id) {

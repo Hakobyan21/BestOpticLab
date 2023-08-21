@@ -361,32 +361,21 @@ class superAdminModel {
 
     static async changeBoxParams(payload) {
         try {
-            console.log(payload, 'payload');
-            if(payload.title) {
-                const method = await pg('ship_methods').select('*').where('title', payload.title);
-                // if(payload.title.length !== 0){
-                // await pg("ship_methods").update({ status: false });
+            if(payload.ids.length>0) {
+                const method = await pg('ship_methods').select('*').whereIn('id', payload.ids);
                 for (let i = 0; i < method.length; i++) {
-                    console.log(method[i]);
                     if(method[i].status == true) {
-                        await pg('ship_methods').update({ status: false }).where('title', '=', payload.title);
+                        await pg('ship_methods').update({ status: false }).whereIn('id', payload.ids);
                     }else {
-                        await pg('ship_methods').update({ status: true }).where('title', '=', payload.title);
+                        await pg('ship_methods').update({ status: true }).whereIn('id', payload.ids);
                     }
                 }
-                // const changedData = await pg("boxparams").update({ 'weight': payload.weight, 'height': payload.height, 'length': payload.length, 'width': payload.widht, 'distance_unit': payload.distance_unit, 'mass_unit': payload.mass_unit, updated_at: new Date() }).where('id', '=', 1);
-                return await pg('ship_methods').returning('*');
+                return pg('ship_methods').select('*');
     
             }else{
-                const changedData = await pg('boxparams').update({ 'weight': payload.weight, 'height': payload.height, 'length': payload.length, 'width': payload.widht, 'distance_unit': payload.distance_unit, 'mass_unit': payload.mass_unit, updated_at: new Date() }).where('id', '=', 1);
-
-                return await pg('boxparams').returning('*');
-
+                const changedData = await pg('boxparams').update({ 'weight': payload.weight, 'height': payload.height, 'length': payload.length, 'width': payload.widht, 'distance_unit': payload.distance_unit, 'mass_unit': payload.mass_unit, 'updated_at': new Date() }).where('id','=', 1);
+                return pg('boxparams').select('*');
             }
-            
-
-
-            // return 'success';
         } catch (error) {
             console.log(error);
             return 'change failed';
@@ -395,9 +384,8 @@ class superAdminModel {
 
     static async getBoxParams() {
         try {
-            const data = await pg('boxparams').select('length', 'width', 'height', 'mass_unit', 'distance_unit', 'weight').where('id', '=', 1);
-
-            return data[0];
+            const data = await pg('boxparams').select('*').first()
+            return data
         } catch (error) {
             console.log(error);
             return 'failed';

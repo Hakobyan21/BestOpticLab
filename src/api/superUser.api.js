@@ -221,9 +221,15 @@ router.post(
     superAdminController.addBoxParams
 );
 
+router.get(
+    '/getBoxParams',
+    // AuthMiddleware.authenticateFor(['admin']),
+    superAdminController.getBoxParams
+);
+
 router.put(
     '/changeBoxParams',
-    AuthMiddleware.authenticateFor(['admin']),
+    // AuthMiddleware.authenticateFor(['admin']),
     superAdminController.changeBoxParams
 );
 

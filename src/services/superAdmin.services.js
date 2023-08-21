@@ -217,6 +217,10 @@ export default class SuperAdminServices {
     static addBoxParams(payload) {
         return SuperAdminModel.addBoxParams(payload);
     }
+    static getBoxParams() {
+        return SuperAdminModel.getBoxParams();
+    }
+    
 
 
     static changeBoxParams(payload) {

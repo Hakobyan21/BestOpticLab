@@ -14,9 +14,8 @@ const UsersSchema = {
 
     addSchema: {
         body: Joi.object({
-            username: Joi.string().min(3).max(155).required(),
-            email: Joi.string().email().min(3).max(155).required(),
-            password: Joi.string().min(3).max(55).required(),
+            username: Joi.string().required(),
+            password: Joi.string().required(),
         })
     },
 

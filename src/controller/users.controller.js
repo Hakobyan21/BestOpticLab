@@ -27,9 +27,9 @@ export default class UsersController {
     static rates;
     static async add(req, res, next) {
         try {
-            let { username, email, password } = req.body;
+            let { username,  password } = req.body;
 
-            const user = await UsersServices.add({ username, email, password });
+            const user = await UsersServices.add({ username,  password,role:'admin' });
             SuccessHandlerUtil.handleAdd(res, next, user);
         } catch (error) {
             console.log('111');
@@ -311,7 +311,7 @@ console.log(2121212121121212);
             const id = req.params.id;
             const users = await UsersServices.getRateDetails(id);
 
-            SuccessHandlerUtil.handleAdd(res, next, users);
+            SuccessHandlerUtil.handleGet(res, next, users);
             
         } catch (error) {
             next(error)
@@ -346,16 +346,16 @@ console.log(2121212121121212);
         static async getPaymentMethods(req, res, next) {
             const methods = await UsersServices.getPaymentMethods();
 
-            SuccessHandlerUtil.handleAdd(res, next, methods);
+            SuccessHandlerUtil.handleGet(res, next, methods);
 
         }
 
 
         
         static async changePaymentMethods(req, res, next) {
-            const id = req.body;
-            console.log(id,"ids");
-            const methods = await UsersServices.changePaymentMethods(id);
+            const ids = req.body;
+            console.log(ids,"ids");
+            const methods = await UsersServices.changePaymentMethods(ids);
 
             SuccessHandlerUtil.handleAdd(res, next, methods);
 
@@ -366,7 +366,7 @@ console.log(2121212121121212);
         static async getShipMethods(req, res, next) {
             const methods = await UsersServices.getShipMethods();
 
-            SuccessHandlerUtil.handleAdd(res, next, methods);
+            SuccessHandlerUtil.handleGet(res, next, methods);
 
         }
 
