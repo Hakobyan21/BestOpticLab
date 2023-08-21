@@ -40,8 +40,8 @@ export default class SuperAdminServices {
     static async addColumn(addColumn){
         return SuperAdminModel.addColumn(addColumn);
     }
-    static async getColumns(id){
-        return SuperAdminModel.getColumns(id);
+    static async getColumns(){
+        return SuperAdminModel.getColumns();
     }
     
     static async insertValues(insertingData){

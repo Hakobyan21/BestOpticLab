@@ -14,9 +14,14 @@ const AddSchema = {
     },
 
     createTable: {
-        body: Joi.array().items(Joi.string().required(), Joi.object({
-            columnName: Joi.string().required()
-        })).required()
+        body: Joi.array().items(Joi.string().required(),
+         Joi.object({
+            columnName: Joi.string().required(),
+        }).required(),
+        Joi.object({
+            value:Joi.string()
+        }).required()).required(),
+        
     },
 
     addStyles: {

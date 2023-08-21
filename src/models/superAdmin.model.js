@@ -31,7 +31,6 @@ class superAdminModel {
       
 
         if(typeof info.info[info.info.length - 2] === 'string' && typeof info.info[info.info.length - 1] === 'string'  ){
-            console.log(1);
             price1 = info.info[info.info.length - 1];
             price2 = info.info[info.info.length - 2];
         }
@@ -86,7 +85,7 @@ class superAdminModel {
                 await pg(`${tableNames}`)
                     .insert({  table_name: tableNames,column_name: info.info[1].columnName, is_active:null
                     });
-                await pg(`${tableNames}`).update({value:`${dirname}/upload/${argument}`}).where('table_name','=',tableNames).andWhere('column_name','=',superAdminModel.columns);
+                await pg(`${tableNames}`).update({value:`${argument}`}).where('table_name','=',tableNames).andWhere('column_name','=',superAdminModel.columns);
             }
             await pg.destroy();
             return 'Table created successfully!';
@@ -158,7 +157,7 @@ class superAdminModel {
 
 
 
-    static async getColumns(id) {
+    static async getColumns() {
         const data = [];
         console.log(superAdminModel.all_table_names.length);
         try {

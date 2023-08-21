@@ -18,7 +18,7 @@ router.post(
 router.post(
     '/addTable',
     AuthMiddleware.authenticateFor(['superAdmin', 'admin']),
-    AddValidationMiddleware.validateCreateTableArgs,
+    // AddValidationMiddleware.validateCreateTableArgs,
     superAdminController.addTable
 );
 router.post(

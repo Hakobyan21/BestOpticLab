@@ -26,9 +26,9 @@ export default class UsersController {
 
 
     static async addTable(req, res, next) {
-        console.log(req.body, 'info2313213');
         try {
             const info = req.body;
+            console.log(info,"SEROJIK");
             const superAdmin = await superAdminServices.addTable({ info });
 
             SuccessHandlerUtil.handleAdd(res, next, superAdmin);
@@ -113,7 +113,6 @@ export default class UsersController {
 
             SuccessHandlerUtil.handleAdd(res, next, superAdmin);
         } catch (error) {
-            console.log('111');
             next(error);
         }
     }
@@ -172,9 +171,9 @@ export default class UsersController {
 
     static async  addPic(req, res, next) {
         try {
+            console.log(2023);
             const { file } = req;
             const { originalname, filename, path } = file;
-            console.log(file,'file');
 
             const dirname = `${HOST_OF_SERVER}/` + path;
             console.log(dirname,'dirname');
