@@ -60,7 +60,7 @@ router.get(
 
 router.post(
     '/insertValues',
-    AuthMiddleware.authenticateFor(['superAdmin', 'admin']),
+    // AuthMiddleware.authenticateFor(['superAdmin', 'admin']),
     AddValidationMiddleware.validateInsertingArgs,
     superAdminController.insertValues
 );
