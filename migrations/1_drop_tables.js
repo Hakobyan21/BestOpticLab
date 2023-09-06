@@ -17,7 +17,6 @@ class DropTables{
 
     }
     static down(){
-
         return pg.schema
             .dropTableIfExists('users')
             .dropTableIfExists('superLogin')
@@ -39,8 +38,10 @@ class DropTables{
             .dropTableIfExists('payment_methods')
             .dropTableIfExists('ship_methods')
             .dropTableIfExists('paypal_orders')
-            .dropTableIfExists('company_settings');
-
+            .dropTableIfExists('company_settings')
+            .dropTableIfExists('tasks')
+            .dropTableIfExists('tasks_admin')        
+            .dropTableIfExists('employes');                    
             
     }
 

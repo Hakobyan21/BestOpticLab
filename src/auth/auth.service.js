@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken';
-import { AuthModel, UsersModel, AdminModels } from '../models';
+import { AuthModel, UsersModel, AdminModels,EmployersModel } from '../models';
 import { ErrorsUtil, CryptoUtil } from '../utils';
 import nodemailer from 'nodemailer';
 import config from '../config/variables.config';
@@ -110,6 +110,63 @@ export default class AuthService {
 
     }
 
+    static async loginTasks(email, password) {
+        if(email) {
+            const user = await EmployersModel.findByUsername(email);
+            if (!user) {
+                const admin = await EmployersModel.findByUsername(email);
+                if(!admin) throw new InputValidationError('Invalid username or password');
+                if (!CryptoUtil.isValidPassword(password, admin.password)) {
+                    throw new InputValidationError('Invalid username or password');
+                }
+                delete admin.password;
+                const { accessToken, refreshToken } = AuthService.generateTokens({ ...admin });
+    
+                const payload = {
+                    id: admin.id,
+                    username: admin.email,
+                    role: admin.role,
+                    accessToken,
+                    refreshToken
+                };
+                return payload;
+            }
+            if (!CryptoUtil.isValidPassword(password, user.password)) {
+                throw new InputValidationError('Invalid username or password');
+            }
+            delete user.password;
+            const { accessToken, refreshToken } = AuthService.generateTokens({ ...user });
+
+            const payload = {
+                id: user.id,
+                username: user.email,
+                role: user.role,
+                accessToken,
+                refreshToken
+
+            };
+            return payload;
+        }else {
+            const user = await EmployersModel.findByEmail(email);
+            if (!user) throw new InputValidationError('Invalid username or password');
+            if (!CryptoUtil.isValidPassword(password, user.password)) {
+                throw new InputValidationError('Invalid username or password');
+            }
+            delete user.password;
+            const { accessToken, refreshToken } = AuthService.generateTokens({ ...user });
+
+            const payload = {
+                id: user.id,
+                username: user.email,
+                role: user.role,
+                accessToken,
+                refreshToken
+
+            };
+            return payload;
+        }
+
+    }
 
     static async googleLogin(userObject) {
         const user = await AuthModel.findByEmail(userObject.email);

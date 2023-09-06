@@ -13,7 +13,6 @@
     "seed": "babel-node seeds/dev/seed.js",
     "dev-seed": "babel-node seeds/dev/seed.js",
     "reset": "npm run migrate-down && npm run migrate && npm run seed",
-
     "lint-no-fix": "eslint src/",
     "lint": "eslint --fix src/"
   },
@@ -39,6 +38,7 @@
     "bcrypt": "^5.1.0",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.2",
+    "colors": "^1.4.0",
     "cors": "^2.8.5",
     "dotenv": "^16.0.3",
     "eslint-config-airbnb": "^18.2.0",

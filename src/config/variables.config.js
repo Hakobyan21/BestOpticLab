@@ -34,6 +34,16 @@ const config = {
         ACCESS_TOKEN_ACTIVE_TIME: process.env.ACCESS_TOKEN_ACTIVE_TIME || '60000ms',
         REFRESH_TOKEN_ACTIVE_TIME: process.env.REFRESH_TOKEN_ACTIVE_TIME || '1h',
     },
+
+    TASKS:{
+
+        TASKS_LOGIN:process.env.TASKS_ADMIN_LOGIN,
+        TASKS_PWD:process.env.TASKS_ADMIN_PWD,
+
+
+    }
+
+
 };
 
 export default config;

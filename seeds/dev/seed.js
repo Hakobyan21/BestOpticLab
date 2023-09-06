@@ -5,7 +5,7 @@ import knexConfigs from '../../knex.configs';
 import config from '../../src/config/variables.config';
 
 const { SUPERADMIN_PASSWORD, API } = config;
-
+const { TASKS } = config
 async function seed(pg) {
     // Deletes ALL existing entries
     await pg('users').truncate();
@@ -289,6 +289,14 @@ async function seed(pg) {
             director: 'Mr director',  // change
             company_name: 'Best Optic Lab',
             company_address: '820 Thompson Ave, Ste 30 Glendale, CA 91201',
+            created_at: new Date().toISOString(),
+        },
+    ])
+    await pg('employes').insert([
+        {
+            email:TASKS.TASKS_LOGIN,
+            password: bCrypt.hashSync(TASKS.TASKS_PWD, bCrypt.genSaltSync(10), null),
+            role:"tasks_admin",
             created_at: new Date().toISOString(),
         },
     ]);

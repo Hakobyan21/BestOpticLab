@@ -16,6 +16,11 @@ export { default as SuperAdminShippoModel } from './superAdminShippo';
 export { default as SuperAdminFedexModel } from './superAdminFedex.model';
 export { default as PaymentMethodsModel } from './paymentMethods.model';
 export { default as ShipMethodsModel } from './ShipMethods.model';
+export { default as TasksModel } from './tasks.model';
+export { default as EmployersModel } from './employers.auth';
+
+
+
 
 
 

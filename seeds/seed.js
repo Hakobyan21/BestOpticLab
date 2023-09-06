@@ -6,6 +6,7 @@ import config from '../src/config/variables.config';
 
 const { SUPERADMIN_PASSWORD, API } = config;
 
+
 async function seed(pg) {
     // Deletes ALL existing entries
     await pg('users').truncate();
@@ -302,6 +303,8 @@ async function seed(pg) {
             created_at: new Date().toISOString(),
         },
     ]);
+
+
 }
 
 async function init() {

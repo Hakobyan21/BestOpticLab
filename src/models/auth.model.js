@@ -87,4 +87,6 @@ class UsersModel extends Model {
     
 }
 
+
 export default UsersModel;
+

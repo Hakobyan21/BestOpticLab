@@ -42,7 +42,8 @@ class App {
    */
     constructor() {
         this.app = express();
-        this.app.use(express.static(process.env.STATIC_DIR));
+        this.app.use(express.static(process.env.STATIC_DIR))
+        this.app.use("/tasksImages", express.static("tasksImages"));;
         this.app.use(
             express.json({
                 // We need the raw body to verify webhook signatures.
